@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Todos from "./components/Todos";
+import Button from "./components/Button";
 import "./App.css";
 
 const App = () => {
@@ -35,18 +37,23 @@ const App = () => {
   };
 
   const clickAddTodo = () => {
-    // event.preventDefault();
-    const newTodo = {
-      id: todos.length + 1,
-      title,
-      content,
-      isDone: false,
-    };
+    if (title === "") {
+      alert("제목을 입력해주세요 !");
+    } else if (content === "") {
+      alert("내용을 입력해주세요 !");
+    } else {
+      const newTodo = {
+        id: todos.length + 1,
+        title,
+        content,
+        isDone: false,
+      };
 
-    setTodos([...todos, newTodo]); // 짜증나
+      setTodos([...todos, newTodo]);
 
-    setTitle("");
-    setContent("");
+      setTitle("");
+      setContent("");
+    }
   };
 
   const clickRemoveTodo = (id) => {
@@ -65,54 +72,47 @@ const App = () => {
     }
   };
 
-  // 여기서 if문 대신 filter 사용해서 map에 적용
-  const workingTodo = todos.filter((todo) => !todo.isDone);
-  const doneTodo = todos.filter((todo) => todo.isDone);
-
   return (
-    <div>
+    <div className="App">
       <header>
-        <div className="head-title">
-          <span>My Todo List </span>
-          <span>React</span>
-        </div>
+        <h1> ✔️ 투두리스트</h1>
         <div className="input-form">
-          제목 <input value={title} onChange={titleChangeHandler} />
-          내용 <input value={content} onChange={contentChangeHandler} />
-          <button onClick={clickAddTodo}>추가하기</button>
+          <label>제목</label>
+          <input value={title} onChange={titleChangeHandler} />
+          <label>내용</label>
+          <input value={content} onChange={contentChangeHandler} />
+          <Button clickAddTodo={clickAddTodo} />
         </div>
       </header>
       <main>
-        <h2>Working.. 🔥</h2>
+        <h2> [ 진행중.. 🐣 ]</h2>
         <div className="working-todolist">
-          {workingTodo.map((todo) => {
-            return (
-              <div className="todo-card" key={todo.id}>
-                <h3>{todo.title}</h3> {todo.content}
-                <button onClick={() => clickRemoveTodo(todo.id)}>
-                  삭제하기
-                </button>
-                <button onClick={() => toggleTodo(todo.id)}>
-                  {todo.isDone === false ? "완료" : "취소"}
-                </button>
-              </div>
-            );
+          {todos.map((todo) => {
+            if (todo.isDone === false) {
+              return (
+                <Todos
+                  key={todo.id}
+                  todo={todo}
+                  clickRemoveTodo={clickRemoveTodo}
+                  toggleTodo={toggleTodo}
+                />
+              );
+            }
           })}
         </div>
-        <h2>Done..! 🎉</h2>
+        <h2>[ 완료..! 🐥 ] </h2>
         <div className="done-todolist">
-          {doneTodo.map((todo) => {
-            return (
-              <div className="todo-card" key={todo.id}>
-                <h3>{todo.title}</h3> {todo.content}
-                <button onClick={() => clickRemoveTodo(todo.id)}>
-                  삭제하기
-                </button>
-                <button onClick={() => toggleTodo(todo.id)}>
-                  {todo.isDone === false ? "완료" : "취소"}
-                </button>
-              </div>
-            );
+          {todos.map((todo) => {
+            if (todo.isDone === true) {
+              return (
+                <Todos
+                  key={todo.id}
+                  todo={todo}
+                  clickRemoveTodo={clickRemoveTodo}
+                  toggleTodo={toggleTodo}
+                />
+              );
+            }
           })}
         </div>
       </main>
