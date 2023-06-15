@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import Todos from "./components/Todos";
+import Button from "./components/Button";
 import "./App.css";
 
 const App = () => {
@@ -65,10 +67,6 @@ const App = () => {
     }
   };
 
-  // 여기서 if문 대신 filter 사용해서 map에 적용
-  const workingTodo = todos.filter((todo) => !todo.isDone);
-  const doneTodo = todos.filter((todo) => todo.isDone);
-
   return (
     <div>
       <header>
@@ -79,40 +77,38 @@ const App = () => {
         <div className="input-form">
           제목 <input value={title} onChange={titleChangeHandler} />
           내용 <input value={content} onChange={contentChangeHandler} />
-          <button onClick={clickAddTodo}>추가하기</button>
+          <Button clickAddTodo={clickAddTodo} />
         </div>
       </header>
       <main>
         <h2>Working.. 🔥</h2>
         <div className="working-todolist">
-          {workingTodo.map((todo) => {
-            return (
-              <div className="todo-card" key={todo.id}>
-                <h3>{todo.title}</h3> {todo.content}
-                <button onClick={() => clickRemoveTodo(todo.id)}>
-                  삭제하기
-                </button>
-                <button onClick={() => toggleTodo(todo.id)}>
-                  {todo.isDone === false ? "완료" : "취소"}
-                </button>
-              </div>
-            );
+          {todos.map((todo) => {
+            if (todo.isDone === false) {
+              return (
+                <Todos
+                  key={todo.id}
+                  todo={todo}
+                  clickRemoveTodo={clickRemoveTodo}
+                  toggleTodo={toggleTodo}
+                />
+              );
+            }
           })}
         </div>
         <h2>Done..! 🎉</h2>
         <div className="done-todolist">
-          {doneTodo.map((todo) => {
-            return (
-              <div className="todo-card" key={todo.id}>
-                <h3>{todo.title}</h3> {todo.content}
-                <button onClick={() => clickRemoveTodo(todo.id)}>
-                  삭제하기
-                </button>
-                <button onClick={() => toggleTodo(todo.id)}>
-                  {todo.isDone === false ? "완료" : "취소"}
-                </button>
-              </div>
-            );
+          {todos.map((todo) => {
+            if (todo.isDone === true) {
+              return (
+                <Todos
+                  key={todo.id}
+                  todo={todo}
+                  clickRemoveTodo={clickRemoveTodo}
+                  toggleTodo={toggleTodo}
+                />
+              );
+            }
           })}
         </div>
       </main>
