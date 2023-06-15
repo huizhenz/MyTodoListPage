@@ -37,18 +37,23 @@ const App = () => {
   };
 
   const clickAddTodo = () => {
-    // event.preventDefault();
-    const newTodo = {
-      id: todos.length + 1,
-      title,
-      content,
-      isDone: false,
-    };
+    if (title === "") {
+      alert("제목을 입력해주세요 !");
+    } else if (content === "") {
+      alert("내용을 입력해주세요 !");
+    } else {
+      const newTodo = {
+        id: todos.length + 1,
+        title,
+        content,
+        isDone: false,
+      };
 
-    setTodos([...todos, newTodo]); // 짜증나
+      setTodos([...todos, newTodo]);
 
-    setTitle("");
-    setContent("");
+      setTitle("");
+      setContent("");
+    }
   };
 
   const clickRemoveTodo = (id) => {
@@ -68,20 +73,19 @@ const App = () => {
   };
 
   return (
-    <div>
+    <div className="App">
       <header>
-        <div className="head-title">
-          <span>My Todo List </span>
-          <span>React</span>
-        </div>
+        <h1> ✔️ 투두리스트</h1>
         <div className="input-form">
-          제목 <input value={title} onChange={titleChangeHandler} />
-          내용 <input value={content} onChange={contentChangeHandler} />
+          <label>제목</label>
+          <input value={title} onChange={titleChangeHandler} />
+          <label>내용</label>
+          <input value={content} onChange={contentChangeHandler} />
           <Button clickAddTodo={clickAddTodo} />
         </div>
       </header>
       <main>
-        <h2>Working.. 🔥</h2>
+        <h2> [ 진행중.. 🐣 ]</h2>
         <div className="working-todolist">
           {todos.map((todo) => {
             if (todo.isDone === false) {
@@ -96,7 +100,7 @@ const App = () => {
             }
           })}
         </div>
-        <h2>Done..! 🎉</h2>
+        <h2>[ 완료..! 🐥 ] </h2>
         <div className="done-todolist">
           {todos.map((todo) => {
             if (todo.isDone === true) {
