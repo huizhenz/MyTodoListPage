@@ -1,5 +1,5 @@
-const Button = ({ clickAddTodo }) => {
-  return <button onClick={clickAddTodo}>등록</button>;
+const Button = (props) => {
+  return <button onClick={props.onClick}>{props.children}</button>;
 };
 
 export default Button;
