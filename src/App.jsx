@@ -87,6 +87,7 @@ const App = () => {
 
       const newTodos2 = todos.filter((todo) => todo.id !== id);
       setTodos([...newTodos2, doneTodo]);
+      console.log(todos);
     }
   };
 
