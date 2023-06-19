@@ -81,6 +81,7 @@ const App = () => {
   const toggleTodo = (id) => {
     const doneTodo = todos.find((todo) => todo.id === id);
 
+    // doneTodo 에 값이 있으면 실행되는 조건문
     if (doneTodo) {
       doneTodo.isDone = !doneTodo.isDone;
 
