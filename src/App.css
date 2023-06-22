@@ -15,28 +15,27 @@
 
 header {
   text-align: center;
-  padding: 10px;
-}
-
-header > h1 {
-  margin-top: 20px;
+  margin: 30px 0px 30px 0px;
 }
 
 /* 인풋 전체 */
-.input-form {
+.inputForm {
+  max-width: 1200px;
+  min-width: 800px;
   background-color: rgb(212, 212, 212);
-  margin-top: 50px;
+  text-align: center;
+  margin: 30px 0px 30px 0px;
   padding: 20px;
 }
 
 /* 인풋의 라벨 부분 */
-.input-form > label {
+.inputForm > label {
   font-size: 18px;
   font-weight: bold;
 }
 
 /* 인풋의 입력 부분 */
-.input-form > input {
+.inputForm > input {
   width: 230px;
   font-size: 18px;
   margin: 0px 40px 0px 10px;
@@ -44,7 +43,7 @@ header > h1 {
 }
 
 /* 인풋의 버튼 부분 */
-.input-form > button {
+.inputForm > button {
   width: 80px;
   color: rgb(0, 0, 0);
   font-size: 18px;
@@ -56,33 +55,32 @@ header > h1 {
   cursor: pointer;
 }
 
-.input-form > button:hover {
+.inputForm > button:hover {
   color: rgb(255, 255, 255);
   background-color: rgb(0, 0, 0);
 }
 
-main {
-  margin-top: 20px;
-  background-image: url(/img/back.jpg);
-  background-size: 1200px 1050px;
-  background-repeat: repeat-y;
-}
-
-main > h2 {
+.listTitle {
   text-align: center;
   background-color: rgb(188, 220, 250);
   padding: 5px;
 }
 
+.todolistContainer {
+  background-image: url(/img/back.jpg);
+  background-size: 1200px 1050px;
+  background-repeat: repeat-y;
+}
+
 /* 각 투두리스트 */
-.working-todolist,
-.done-todolist {
+.workingTodolist,
+.doneTodolist {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 /* working 부분의 todo 카드 */
-.working-todo-card {
+.workingTodoCard {
   position: relative;
   width: 240px;
   height: 140px;
@@ -94,7 +92,7 @@ main > h2 {
 }
 
 /* done 부분의 todo 카드 */
-.done-todo-card {
+.doneTodoCard {
   position: relative;
   width: 240px;
   height: 140px;
@@ -105,13 +103,13 @@ main > h2 {
   padding: 15px;
 }
 
-.working-todo-card > h2,
-.done-todo-card > h2 {
+.workingTodoCard > h2,
+.doneTodoCard > h2 {
   margin: 13px;
 }
 
 /* 압정 이모티콘 */
-.pin-emoticon {
+.pinEmoticon {
   position: absolute;
   top: 4%;
   left: 4%;
